@@ -10,10 +10,8 @@ public class _66022646_Lab2 {
         System.out.println("Please enter your name : ");
         String name = kbd.next();
 
-
         System.out.println("Please enter your age : ");
         int age = kbd.nextInt();
-
 
         System.out.println("Please enter your future occupation");
         String occupation = kbd.next();
@@ -40,7 +38,7 @@ public class _66022646_Lab2 {
         kbd.close();
     }
 
-public static void Ex3() {
+    public static void Ex3() {
         Scanner kbd = new Scanner(System.in);
         Random rnd = new Random();
         int randomNumber = rnd.nextInt(100) + 1;
@@ -55,8 +53,7 @@ public static void Ex3() {
             if (randomNumber == player_num) {
                 System.out.println("Correct");
                 break;
-            }
-             else if (randomNumber > player_num) {
+            } else if (randomNumber > player_num) {
                 System.out.println("Lesser");
             } else if (randomNumber < player_num) {
                 System.out.println("Greater");
@@ -67,41 +64,39 @@ public static void Ex3() {
         kbd.close();
     }
 
-public static void Ex4() {
-    ArrayList<Integer> Al = new ArrayList<Integer>();
-    ArrayList<Integer> odd = new ArrayList<Integer>();
-    ArrayList<Integer> even = new ArrayList<Integer>();
+    public static void Ex4() {
+        ArrayList<Integer> Al = new ArrayList<Integer>();
+        ArrayList<Integer> odd = new ArrayList<Integer>();
+        ArrayList<Integer> even = new ArrayList<Integer>();
 
-    Al.add(69);
-    Al.add(3);
-    Al.add(12);
-    Al.add(21);
-    Al.add(1);
-    Al.add(144);
-    Al.add(2);
-    Al.add(5);
-    Al.add(299);
-    Al.add(4);
+        Al.add(69);
+        Al.add(3);
+        Al.add(12);
+        Al.add(21);
+        Al.add(1);
+        Al.add(144);
+        Al.add(2);
+        Al.add(5);
+        Al.add(299);
+        Al.add(4);
 
-    int sum = 0 ;
-    for (int i : Al) {
-        sum += i;
-        if (i % 2 == 0) {
-            even.add(i);
-    }else{
-        odd.add(i);
+        int sum = 0;
+        for (int i : Al) {
+            sum += i;
+            if (i % 2 == 0) {
+                even.add(i);
+            } else {
+                odd.add(i);
+            }
+        }
+        int size = Al.size();
+        int Average = sum / size;
+        System.out.println(Al);
+        System.out.println("Odd numbers: " + odd);
+        System.out.println("Even numbers: " + even);
+        System.out.println("Average is: " + Average);
+
     }
-}
-    int size = Al.size();
-    int Average = sum / size;
-    System.out.println(Al);
-    System.out.println("Odd numbers: " + odd);
-    System.out.println("Even numbers: " + even);
-    System.out.println("Average is: " + Average);
-
-    }
-
-
 
     public static void Ex5() {
         Scanner kbd = new Scanner(System.in);
@@ -124,46 +119,69 @@ public static void Ex4() {
         System.out.println("Names: " + names);
         System.out.println("Occupations: " + occupations);
         kbd.close();
-    }  
-
-public static void Ex6() {
-    ArrayList<String> SplitWord = new ArrayList<String>();
-    Scanner kbd = new Scanner(System.in);
-
-    System.out.println("Enter your word: ");
-    String word = kbd.next();
-
-    if (word.length() > 15) {
-        System.out.println("The word is too long");
     }
 
-    String[] arrOfStr = word.split("");
-    for (String a : arrOfStr) {
-        SplitWord.add(a);
+    public static void Ex6() {
+        Scanner kbd = new Scanner(System.in);
+        ArrayList<String> splitWord = new ArrayList<>();
+
+        System.out.println("Enter your word: ");
+        String word = kbd.next();
+
+        if (word.length() > 15) {
+            System.out.println("The word is too long");
+            kbd.close();
+            return;
+        }
+
+        String[] arrOfStr = word.split("");
+        for (String a : arrOfStr) {
+            splitWord.add(a);
+        }
+
+        System.out.println("SplitWord: " + splitWord);
+
+        int aCount = 0, eCount = 0, iCount = 0, oCount = 0, uCount = 0;
+        for (String letter : splitWord) {
+            switch (letter) {
+                case "a":
+                    aCount++;
+                    break;
+                case "e":
+                    eCount++;
+                    break;
+                case "i":
+                    iCount++;
+                    break;
+                case "o":
+                    oCount++;
+                    break;
+                case "u":
+                    uCount++;
+                    break;
+            }
+        }
+
+        System.out.println("a : " + aCount);
+        System.out.println("e : " + eCount);
+        System.out.println("i : " + iCount);
+        System.out.println("o : " + oCount);
+        System.out.println("u : " + uCount);
+
+        kbd.close();
     }
 
-    System.out.println("SplitWord: " + SplitWord);
-
-    System.out.println("a : " + SplitWord.indexOf("a"));
-    System.out.println("e : " + SplitWord.indexOf("e"));
-    System.out.println("i : " + SplitWord.indexOf("i"));
-    System.out.println("o : " + SplitWord.indexOf("o"));
-    System.out.println("u : " + SplitWord.indexOf("u"));
-
-    kbd.close();
-}
-    
     public static void main(String[] args) {
-        Ex1();
+        Ex1(); 
 
-        Ex2();
+        Ex2(); 
 
-        Ex3();
+        Ex3(); 
 
-        Ex4();
+        Ex4(); 
 
-        Ex5();
+        Ex5(); 
 
-        Ex6();
+        Ex6(); 
     }
 }
