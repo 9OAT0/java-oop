@@ -1,187 +1,199 @@
-import java.util.Random;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class _66022646_Lab2 {
-
-    public static void Ex1() {
-        Scanner kbd = new Scanner(System.in);
-
-        System.out.println("Please enter your name : ");
-        String name = kbd.next();
-
-        System.out.println("Please enter your age : ");
-        int age = kbd.nextInt();
-
-        System.out.println("Please enter your future occupation");
-        String occupation = kbd.next();
-
-        System.out.println("Your name is : " + name);
-        System.out.println("Your age is : " + age);
-        System.out.print("Your future occupation is : " + occupation);
-
-        kbd.close();
-    }
-
-    public static void Ex2() {
-        Scanner kbd = new Scanner(System.in);
-
-        System.out.println("Enter a number : ");
-        int n = kbd.nextInt();
-        int sum = 0;
-        for (int i = 1; i <= n; i++) {
-            int num = kbd.nextInt();
-            sum += num;
-        }
-        int Average = sum / n;
-        System.out.println("the Average is " + Average);
-        kbd.close();
-    }
-
-    public static void Ex3() {
-        Scanner kbd = new Scanner(System.in);
-        Random rnd = new Random();
-        int randomNumber = rnd.nextInt(100) + 1;
-
-        System.out.println("Enter your number : ");
-        int player_num = kbd.nextInt();
-
-        System.out.println("Random num " + randomNumber);
-
-        boolean player_lose = true;
-        while (player_lose == true) {
-            if (randomNumber == player_num) {
-                System.out.println("Correct");
-                break;
-            } else if (randomNumber > player_num) {
-                System.out.println("Lesser");
-            } else if (randomNumber < player_num) {
-                System.out.println("Greater");
-            }
-            System.out.println("Enter your number : ");
-            player_num = kbd.nextInt();
-        }
-        kbd.close();
-    }
-
-    public static void Ex4() {
-        ArrayList<Integer> Al = new ArrayList<Integer>();
-        ArrayList<Integer> odd = new ArrayList<Integer>();
-        ArrayList<Integer> even = new ArrayList<Integer>();
-
-        Al.add(69);
-        Al.add(3);
-        Al.add(12);
-        Al.add(21);
-        Al.add(1);
-        Al.add(144);
-        Al.add(2);
-        Al.add(5);
-        Al.add(299);
-        Al.add(4);
-
-        int sum = 0;
-        for (int i : Al) {
-            sum += i;
-            if (i % 2 == 0) {
-                even.add(i);
-            } else {
-                odd.add(i);
-            }
-        }
-        int size = Al.size();
-        int Average = sum / size;
-        System.out.println(Al);
-        System.out.println("Odd numbers: " + odd);
-        System.out.println("Even numbers: " + even);
-        System.out.println("Average is: " + Average);
-
-    }
-
-    public static void Ex5() {
-        Scanner kbd = new Scanner(System.in);
-        ArrayList<String> occupations = new ArrayList<>();
-        ArrayList<String> names = new ArrayList<>();
-
-        boolean unExit = true;
-        while (unExit) {
-            System.out.println("Enter your name and your occupation (type 'exit' to finish): ");
-            String name = kbd.next();
-            if (name.equals("exit")) {
-                unExit = false;
-            } else {
-                names.add(name);
-                String occupation = kbd.next();
-                occupations.add(occupation);
-            }
-        }
-
-        System.out.println("Names: " + names);
-        System.out.println("Occupations: " + occupations);
-        kbd.close();
-    }
-
-    public static void Ex6() {
-        Scanner kbd = new Scanner(System.in);
-        ArrayList<String> splitWord = new ArrayList<>();
-
-        System.out.println("Enter your word: ");
-        String word = kbd.next();
-
-        if (word.length() > 15) {
-            System.out.println("The word is too long");
-            kbd.close();
-            return;
-        }
-
-        String[] arrOfStr = word.split("");
-        for (String a : arrOfStr) {
-            splitWord.add(a);
-        }
-
-        System.out.println("SplitWord: " + splitWord);
-
-        int aCount = 0, eCount = 0, iCount = 0, oCount = 0, uCount = 0;
-        for (String letter : splitWord) {
-            switch (letter) {
-                case "a":
-                    aCount++;
-                    break;
-                case "e":
-                    eCount++;
-                    break;
-                case "i":
-                    iCount++;
-                    break;
-                case "o":
-                    oCount++;
-                    break;
-                case "u":
-                    uCount++;
-                    break;
-            }
-        }
-
-        System.out.println("a : " + aCount);
-        System.out.println("e : " + eCount);
-        System.out.println("i : " + iCount);
-        System.out.println("o : " + oCount);
-        System.out.println("u : " + uCount);
-
-        kbd.close();
-    }
-
     public static void main(String[] args) {
-        Ex1(); 
 
-        Ex2(); 
+        Scanner kbd = new Scanner(System.in);
 
-        Ex3(); 
 
-        Ex4(); 
+        // Object
+        Kinght Arthur = new Kinght();
+        Arthur.name = "Arthur";
+        Arthur.hp = 100;
+        Arthur.mp = 100;
+        Arthur.Attack();
+        Arthur.Block();
+        Arthur.ShowDetails();
 
-        Ex5(); 
+        Mage Sorcerer = new Mage();
+        Sorcerer.name = "Sorcerer";
+        Sorcerer.hp = 100;
+        Sorcerer.mp = 100;
+        Sorcerer.Attack();
+        Sorcerer.Magic();
+        Sorcerer.ShowDetails();
 
-        Ex6(); 
+        System.out.println("Please enter How many your product :");
+        int Products = kbd.nextInt();
+        for (int i = 0; i < Products; i++) {
+        Product product = new Product();
+
+        System.out.println("Please enter your product name:");
+        product.name = kbd.next();
+
+        System.out.println("Please enter your product price: ");
+        product.price = kbd.nextInt();
+
+        System.out.println("Please enter your product quantity: ");
+        product.quantity = kbd.nextInt();
+        product.ShowDetails();
+
+        System.out.println();
+        System.out.println("There are " + ((Products - 1) - i ) +" products left.");
+        }
+
+        kbd.close();
+
+        student john = new student("john" , 66022646);
+
+        student anna = new student("anna", 66022345);
+
+        //course
+        course java = new course("java",2348902,3);
+        course c = new course("c",2348903,3);
+        course python = new course("python", 2343243, 3);
+        course csharp = new course("csharp", 2343244, 3);
+
+        course phy = new course("physic", 2342532, 3);
+        course chem = new course("chemistry", 2342533, 3);
+        course math = new course("math", 2342534, 3);
+
+
+
+        john.addcourse(c);
+        john.addcourse(java);
+        john.addcourse(python);
+        john.addcourse(csharp);
+
+
+        anna.addcourse(phy);
+        anna.addcourse(chem);
+        anna.addcourse(math);
+
+        john.ShowDetails();
+
+        anna.ShowDetails();
+    }
+
+}
+
+
+class Kinght {
+    // Prop
+    public int hp;
+    public int mp;
+    public String name;
+
+    // Method
+    public void Attack() {
+        System.out.println("Knigth is Attacking!!!!");
+    }
+
+    public void Block() {
+        System.out.println("Knigth is Blocking!!!!");
+    }
+
+    public void ShowDetails() {
+        System.out.println("*** Details of " + this.name + "***");
+        System.out.println("Name : " + this.name);
+        System.out.println("HP : " + this.hp);
+        System.out.println("MP : " + this.mp);
+    }
+}
+
+class Mage {
+    // Prop
+    public int hp;
+    public int mp;
+    public String name;
+
+    // Method
+    public void Attack() {
+        System.out.println("Mage is Attacking!!!!");
+    }
+
+    public void Magic() {
+        System.out.println("Mage is useing Magic!!!!");
+    }
+
+    public void ShowDetails() {
+        System.out.println("*** Details of " + this.name + "***");
+        System.out.println("Name : " + this.name);
+        System.out.println("HP : " + this.hp);
+        System.out.println("MP : " + this.mp);
+    }
+}
+
+class Product {
+    // Prop
+    public String name;
+    public int price;
+    public int quantity;
+
+    // Method
+    public void ShowDetails() {
+        System.out.println("*** Details of " + this.name + "***");
+        System.out.println("Name : " + this.name);
+        System.out.println("Price : " + this.price);
+        System.out.println("Quantity : " + this.quantity);
+        System.out.println("Total price :" + this.price * this.quantity);
+    }
+}
+
+class student {
+    // Prop
+    public String name;
+    public int student_code;
+
+    ArrayList<course> courses  = new ArrayList<course>();
+
+    // Method
+
+    student(String name, int student_code) {
+        this.name = name;
+        this.student_code = student_code;
+    }
+    public void ShowDetails() {
+        System.out.println("*** Details of " + this.name + " ***");
+        System.out.println("Name : " + this.name);
+        System.out.println("Student code : " + this.student_code);
+        System.out.println();
+        System.out.println("*** Detaile of " + this.name + " course ***");
+        System.out.println();
+        for (course course : this.courses) {
+            course.ShowDetails();
+        }
+    }
+
+    public void addcourse(course course) {
+        this.courses.add(course);
+    }
+}
+
+class course {
+    // Prop
+    int course_code;
+    String course_name;
+    int creadit;
+
+    course(String course_name, int course_code, int creadit){
+        this.course_name = course_name;
+        this.course_code = course_code;
+        this.creadit = creadit;
+    }
+
+    // Method
+
+    course(String name){
+        this.course_name = name;
+
+    }
+    public void ShowDetails() {
+        System.out.println("*** Details of " + this.course_name + " ***");
+        System.out.println("Course name : " + this.course_name);
+        System.out.println("Course code : " + this.course_code);
+        System.out.println("Creadit : " + this.creadit);
+        System.out.println();
     }
 }
