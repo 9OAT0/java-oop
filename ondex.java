@@ -1,14 +1,49 @@
-import java.util.Scanner;
-
+import java.util.ArrayList;
+/**
+ * ondex
+ */
 public class ondex {
+
     public static void main(String[] args) {
-        Scanner  kbd = new Scanner(System.in);
+        // int score = 75;
+        // if (score >= 40) {
+        //     System.out.println("F");
+        // } else if (score >= 50) {
+        //     System.out.println("C");
+        // } else if (score >= 60) {
+        //     System.out.println("D");
+        // } else if (score >= 70) {
+        //     System.out.println("B");
+        // } else if (score >= 80) {
+        //     System.out.println("A");
+        // } else {
+        //     System.out.println("Not found");
+        // }
 
-        System.out.println("Enter a number : ");
-        int n = kbd.nextInt();
+        ArrayList<Integer> scores = new ArrayList<Integer>();
+        scores.add(1);
+        scores.add(1);
+        scores.add(1);
+        scores.add(1);
+        scores.add(1);
+        System.out.println(scores.get(scores.size()));
+    }
+}
 
-        System.out.println("The number is : " + n);
+class A {
+    void show() {
+        System.out.println("a Show");
+    }
+}
 
-        kbd.close();
+class B extends A {
+    void show() {
+        System.out.println("b Show");
+    }
+}
+
+class C extends B {
+    void show() {
+        super.show();
     }
 }
