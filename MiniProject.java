@@ -172,6 +172,7 @@ class User implements Serializable {
     public int getAge() {
         return age;
     }
+}{dsfdf}
 
     public double getWeight() {
         return weight;
