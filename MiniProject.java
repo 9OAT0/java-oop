@@ -61,6 +61,7 @@ public class MiniProject extends JFrame {
         loadUser();
 
         setVisible(true);
+        
     }
 
     private void createUser() {
@@ -69,43 +70,50 @@ public class MiniProject extends JFrame {
         double weight = Double.parseDouble(weightField.getText());
         user = new User(name, age, weight);
         outputArea.append("User created: " + name + ", Age: " + age + ", Weight: " + weight + " kg\n");
+        
+        // ซ่อนปุ่มสร้างผู้ใช้หลังจากที่สร้างผู้ใช้แล้ว
+        createUserButton.setVisible(false);
+        
         saveUser();
     }
-
+    
     private void addActivity() {
         if (user == null) {
             JOptionPane.showMessageDialog(this, "Please create a user first!");
             return;
         }
-
+    
         String[] options = {"Running", "Weightlifting", "Boxing"};
         int choice = JOptionPane.showOptionDialog(this, "Select an activity:", "Activity",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
+    
+        FitnessActivity activity = null;
         if (choice == 0) { // Running
             int duration = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter duration (minutes):"));
             int intensity = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter intensity (1-10):"));
             double distance = Double.parseDouble(JOptionPane.showInputDialog(this, "Enter distance (km):"));
-            RunningActivity runningActivity = new RunningActivity(duration, intensity, distance);
-            user.addActivity(runningActivity);
-            outputArea.append("Running activity added.\n");
+            activity = new RunningActivity(duration, intensity, distance);
         } else if (choice == 1) { // Weightlifting
             int duration = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter duration (minutes):"));
             int intensity = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter intensity (1-10):"));
             int weightLifted = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter weight lifted (kg):"));
             int repetitions = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter repetitions:"));
-            WeightliftingActivity weightliftingActivity = new WeightliftingActivity(duration, intensity, weightLifted, repetitions);
-            user.addActivity(weightliftingActivity);
-            outputArea.append("Weightlifting activity added.\n");
+            activity = new WeightliftingActivity(duration, intensity, weightLifted, repetitions);
         } else if (choice == 2) { // Boxing
             int duration = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter duration (minutes):"));
             int intensity = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter intensity (1-10):"));
             int punches = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter punches thrown:"));
-            BoxingActivity boxingActivity = new BoxingActivity(duration, intensity, punches);
-            user.addActivity(boxingActivity);
-            outputArea.append("Boxing activity added.\n");
+            activity = new BoxingActivity(duration, intensity, punches);
+        }
+    
+        // Add the activity to the user and immediately display the result
+        if (activity != null) {
+            user.addActivity(activity);
+            outputArea.append("Added Activity:\n" + activity.toString() + "\n");
+            outputArea.append("Calories Burned: " + activity.calculateCaloriesBurned() + "\n");
         }
     }
+    
 
     private void showStatistics() {
         if (user == null) {
@@ -127,10 +135,10 @@ public class MiniProject extends JFrame {
     private void loadUser() {
         File file = new File("user.dat");
         if (!file.exists()) {
-            JOptionPane.showMessageDialog(this, "No existing user found. Please create a new user.");
+            outputArea.append("No existing user found. Please create a new user by entering details above.\n");
             return;
         }
-
+    
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             user = (User) ois.readObject();
             if (user != null) {
@@ -138,13 +146,18 @@ public class MiniProject extends JFrame {
                 ageField.setText(String.valueOf(user.getAge()));
                 weightField.setText(String.valueOf(user.getWeight()));
                 outputArea.append("Welcome back, " + user.getName() + "!\n");
+                
+                // Hide the create user button if user data is loaded
+                createUserButton.setVisible(false);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading user data. Please create a new user.");
+            outputArea.append("Error loading user data. Please create a new user by entering details above.\n");
         }
     }
-
+    
+    
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MiniProject::new);
     }
@@ -172,7 +185,6 @@ class User implements Serializable {
     public int getAge() {
         return age;
     }
-}{dsfdf}
 
     public double getWeight() {
         return weight;
